@@ -7,6 +7,7 @@ class DishDetail extends Component {
     }
 
     formatDate(date) {
+        // can use Intl.DateTimeFormat
         let monthNames =["Jan","Feb","Mar","Apr",
                       "May","Jun","Jul","Aug",
                       "Sep", "Oct","Nov","Dec"];

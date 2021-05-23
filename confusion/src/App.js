@@ -5,6 +5,10 @@ import Menu from './components/MenuComponent';
 import { DISHES } from './shared/dishes';
 import React, { Component } from 'react';
 
+
+
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +25,6 @@ class App extends Component {
           </div>
         </Navbar>
         <Menu dishes={this.state.dishes} />
-
       </div>
     );
   }

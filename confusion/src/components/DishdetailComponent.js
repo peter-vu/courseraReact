@@ -14,20 +14,22 @@ class DishDetail extends Component {
         return monthNames[d.getMonth()] + " " + (d.getDate()<10?"0"+d.getDate():d.getDate()) + ", " + d.getFullYear();
     }
 
-    renderComments(id, comments) {
+    renderComments(comments) {
         if(comments.length > 0){
-            const comment = comments.map((c) => {
-                let d = new Date(c.date);
-                return (
-                <ul className="list-unstyled" key={c.id}>
-                    <li>{c.comment}</li>
-                    <li>-- {c.author}, {this.formatDate(c.date)}</li>
-                </ul>
-                );
-            });
             return (<div>
                         <h4>Comments</h4>
-                        {comment}
+                        <ul className="list-unstyled">
+                            {
+                                comments.map(c => 
+                                    (
+                                    <li key={`${c.id}-comment`}>
+                                        <p>{c.comment}</p>
+                                        <p>-- ${c.author}, ${this.formatDate(c.date)}</p>
+                                    </li>
+                                    )
+                                )
+                            }
+                        </ul>
                     </div>
                     );
         }
@@ -51,7 +53,7 @@ class DishDetail extends Component {
                         </Card>
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(dish.id, dish.comments)}
+                        {this.renderComments(dish.comments)}
                     </div>
                 </div>
             );

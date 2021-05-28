@@ -1,32 +1,54 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
-function RenderLeader({leader}) {
+function RenderLeader({item}) {
     return (
         <div className='col-12 mt-5'>
             <Media tag="li">
                 <Media left middle>
-                    <Media object src={leader.image}></Media>
+                    <Media object src={baseUrl + item.image}></Media>
                 </Media>
                 <Media body className="ml-5">
-                    <Media heading>{leader.name}</Media>
-                    <p>{leader.designation}</p>
-                    <p>{leader.description}</p>
+                    <Media heading>{item.name}</Media>
+                    <p>{item.designation}</p>
+                    <p>{item.description}</p>
                 </Media>
             </Media>
         </div>
         )
 }
+{/* <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess} /> */}
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader}/>
+            <RenderLeader item={leader}/>
         );
     });
-
-    return(
+    if (props.leaders.isLoading){
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.leaders.errMess){
+        return(
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12">
+                        <h4>{props.leaders.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else return(
         <div className="container">
             <div className="row">
                 <Breadcrumb>

@@ -3,8 +3,9 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
-function RenderLeader({item}) {
+function RenderLeader({ item }) {
     return (
         <div className='col-12 mt-5'>
             <Media tag="li">
@@ -18,29 +19,31 @@ function RenderLeader({item}) {
                 </Media>
             </Media>
         </div>
-        )
+    )
 }
-{/* <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess} /> */}
+{/* <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess} /> */ }
 function About(props) {
 
     const leaders = props.leaders.leaders.map((leader) => {
         return (
-            <RenderLeader item={leader}/>
+            <Fade in>
+                <RenderLeader item={leader} />
+            </Fade>
         );
     });
-    if (props.leaders.isLoading){
-        return(
+    if (props.leaders.isLoading) {
+        return (
             <div className="container">
-                <div className="row">            
+                <div className="row">
                     <Loading />
                 </div>
             </div>
         );
     }
-    else if (props.leaders.errMess){
-        return(
+    else if (props.leaders.errMess) {
+        return (
             <div className="container">
-                <div className="row"> 
+                <div className="row">
                     <div className="col-12">
                         <h4>{props.leaders.errMess}</h4>
                     </div>
@@ -48,7 +51,7 @@ function About(props) {
             </div>
         );
     }
-    else return(
+    else return (
         <div className="container">
             <div className="row">
                 <Breadcrumb>
@@ -58,7 +61,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>About Us</h3>
                     <hr />
-                </div>                
+                </div>
             </div>
             <div className="row row-content">
                 <div className="col-12 col-md-6">
@@ -104,7 +107,9 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                        <Stagger in>
+                            {leaders}
+                        </Stagger>
                     </Media>
                 </div>
             </div>
@@ -112,4 +117,4 @@ function About(props) {
     );
 }
 
-export default About;    
+export default About;
